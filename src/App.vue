@@ -1,13 +1,16 @@
 <template>
-  <div>
-    <app-header></app-header>
-    <app-about></app-about>
-    <app-footer></app-footer>
+  <div id="app">
+    <app-header />
+    <!-- <router-link to="/login">Login</router-link>
+      <router-link to="/register">Register</router-link> -->
+    <!-- <router-link :to="{ name: 'product', params: { id: productId } }">Product</router-link> -->
+    <router-view></router-view>
+
+    <app-footer />
   </div>
 </template>
 
 <script>
-import AppAbout from "./components/About";
 import AppHeader from "./components/shared/Header";
 import AppFooter from "./components/shared/Footer";
 
@@ -16,7 +19,6 @@ export default {
 
   components: {
     AppHeader,
-    AppAbout,
     AppFooter
   },
 
@@ -25,3 +27,24 @@ export default {
   })
 };
 </script>
+<style>
+#header {
+  padding-bottom: 100px;
+  height: 100px;
+}
+
+.btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+#img {
+  width: 100px;
+  height: 100px;
+}
+
+h4 {
+  margin-top: 20px;
+}
+</style>

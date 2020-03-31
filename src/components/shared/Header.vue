@@ -1,14 +1,14 @@
 <template>
   <div id="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand">JS Books</a>
+      <router-link to="/home" class="navbar-brand">JS Books</router-link>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link">Login <span class="sr-only">(current)</span></a>
+            <router-link to="/login" class="nav-link">Login</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Register</a>
+            <router-link to="/register" class="nav-link">Register</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link">Logout</a>
@@ -35,11 +35,13 @@
             >
               <a class="dropdown-item">All Books</a>
               <div class="dropdown-divider" @click="toggle()"></div>
-              <a class="dropdown-item">Create Book</a>
+              <router-link to="/create" class="dropdown-item"
+                >Create Book</router-link
+              >
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link">About</a>
+            <router-link to="/about" class="nav-link">About</router-link>
           </li>
         </ul>
       </div>

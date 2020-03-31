@@ -1,0 +1,23 @@
+<template>
+  <div class="jumbotron">
+    <h1 class="display-3">Hello, JavaScript!</h1>
+    <p class="lead">This is a simple app for JavaScript books.</p>
+    <hr class="my-4" />
+    <p>If you want to look at the collection or add a new book please login!</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" routerLink="/auth/login" role="button"
+        >Login</a
+      >
+    </p>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scoped>
+.btn-primary {
+  color: white;
+}</style
+>>
