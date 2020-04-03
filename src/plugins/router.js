@@ -10,7 +10,7 @@ import Login from "@/components/auth/Login";
 import BooksCreate from "@/components/books/Books-Create";
 
 const routes = [
-  { path: "/home", component: Home },
+  { path: "/", component: Home },
   { path: "/about", component: About },
   { path: "/register", component: Register },
   { path: "/login", component: Login },

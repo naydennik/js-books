@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <router-link to="/home" class="navbar-brand">JS Books</router-link>
+      <router-link to="/" exact class="navbar-brand">JS Books</router-link>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -21,8 +21,7 @@
               aria-haspopup="true"
               data-toggle="dropdown"
               @click="toggle()"
-              >Books</a
-            >
+            >Books</a>
             <div
               class="dropdown"
               style="left: 0px; top: 0px; position: absolute; transform: translate3d(0px, 40px, 0px);"
@@ -35,9 +34,7 @@
             >
               <a class="dropdown-item">All Books</a>
               <div class="dropdown-divider" @click="toggle()"></div>
-              <router-link to="/create" class="dropdown-item"
-                >Create Book</router-link
-              >
+              <router-link to="/create" class="dropdown-item">Create Book</router-link>
             </div>
           </li>
           <li class="nav-item">

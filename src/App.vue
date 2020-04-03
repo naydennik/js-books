@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <app-header />
-    <!-- <router-link to="/login">Login</router-link>
-      <router-link to="/register">Register</router-link> -->
-    <!-- <router-link :to="{ name: 'product', params: { id: productId } }">Product</router-link> -->
     <router-view></router-view>
-
     <app-footer />
   </div>
 </template>
