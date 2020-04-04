@@ -7,14 +7,20 @@ import Home from "@/components/Home";
 import About from "@/components/About";
 import Register from "@/components/auth/Register";
 import Login from "@/components/auth/Login";
+import BooksAll from "@/components/books/Books-All";
 import BooksCreate from "@/components/books/Books-Create";
+import BooksDetails from "@/components/books/Books-Details";
+import NotFound from "@/components/shared/NotFound";
 
 const routes = [
   { path: "/", component: Home },
   { path: "/about", component: About },
   { path: "/register", component: Register },
   { path: "/login", component: Login },
-  { path: "/create", component: BooksCreate }
+  { path: "/books/all", component: BooksAll },
+  { path: "/books/create", component: BooksCreate },
+  { path: "/books/details/:id", component: BooksDetails },
+  { path: "*", component: NotFound }
 ];
 
 export default new VueRouter({

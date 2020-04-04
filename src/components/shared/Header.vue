@@ -21,7 +21,8 @@
               aria-haspopup="true"
               data-toggle="dropdown"
               @click="toggle()"
-            >Books</a>
+              >Books</a
+            >
             <div
               class="dropdown"
               style="left: 0px; top: 0px; position: absolute; transform: translate3d(0px, 40px, 0px);"
@@ -32,9 +33,13 @@
                 'dropdown-menu show': isActive
               }"
             >
-              <a class="dropdown-item">All Books</a>
+              <router-link to="/books/all" class="dropdown-item"
+                >All Books</router-link
+              >
               <div class="dropdown-divider" @click="toggle()"></div>
-              <router-link to="/create" class="dropdown-item">Create Book</router-link>
+              <router-link to="/books/create" class="dropdown-item"
+                >Create Book</router-link
+              >
             </div>
           </li>
           <li class="nav-item">
