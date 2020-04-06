@@ -4,15 +4,21 @@
       <router-link to="/" exact class="navbar-brand">JS Books</router-link>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link to="/login" class="nav-link">Login</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/register" class="nav-link">Register</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Logout</a>
-          </li>
+          <template v-if="!isAuthenticated">
+            <li class="nav-item">
+              <router-link to="/login" class="nav-link">Login</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/register" class="nav-link"
+                >Register</router-link
+              >
+            </li>
+          </template>
+          <template v-else
+            ><li class="nav-item">
+              <a class="nav-link">Logout</a>
+            </li>
+          </template>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -33,13 +39,15 @@
                 'dropdown-menu show': isActive
               }"
             >
-              <router-link to="/books/all" class="dropdown-item"
+              <router-link to="/books" class="dropdown-item"
                 >All Books</router-link
               >
-              <div class="dropdown-divider" @click="toggle()"></div>
-              <router-link to="/books/create" class="dropdown-item"
-                >Create Book</router-link
-              >
+              <template v-if="isAdmin">
+                <div class="dropdown-divider" @click="toggle()"></div>
+                <router-link to="/books/create" class="dropdown-item"
+                  >Create Book</router-link
+                >
+              </template>
             </div>
           </li>
           <li class="nav-item">

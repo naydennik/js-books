@@ -17,8 +17,13 @@
             @blur="$v.username.$touch"
           />
           <template v-if="$v.username.$error">
-            <div class="alert alert-danger" v-if="!$v.username.required">This field is required!</div>
-            <div class="alert alert-danger" v-else-if="!$v.username.usernamePattern">
+            <div class="alert alert-danger" v-if="!$v.username.required">
+              This field is required!
+            </div>
+            <div
+              class="alert alert-danger"
+              v-else-if="!$v.username.usernamePattern"
+            >
               Username should be at least 3 symbols long and should contain only
               letters and digits!
             </div>
@@ -35,8 +40,13 @@
             @blur="$v.password.$touch"
           />
           <template v-if="$v.password.$error">
-            <div class="alert alert-danger" v-if="!$v.password.required">This field is required!</div>
-            <div class="alert alert-danger" v-else-if="!$v.password.passwordPattern">
+            <div class="alert alert-danger" v-if="!$v.password.required">
+              This field is required!
+            </div>
+            <div
+              class="alert alert-danger"
+              v-else-if="!$v.password.passwordPattern"
+            >
               Password should contain only letters and digits and must be
               between 4 and 16 symbols!
             </div>
@@ -53,14 +63,15 @@
             @blur="$v.confirmPassword.$touch"
           />
           <template v-if="$v.confirmPassword.$error">
-            <div
-              class="alert alert-danger"
-              v-if="!$v.confirmPassword.required"
-            >This field is required!</div>
+            <div class="alert alert-danger" v-if="!$v.confirmPassword.required">
+              This field is required!
+            </div>
             <div
               class="alert alert-danger"
               v-else-if="!$v.confirmPassword.sameAs"
-            >Password and Confirm Password must match!</div>
+            >
+              Password and Confirm Password must match!
+            </div>
           </template>
         </div>
         <div class="form-group">
@@ -74,8 +85,13 @@
             @blur="$v.firstName.$touch"
           />
           <template v-if="$v.firstName.$error">
-            <div class="alert alert-danger" v-if="!$v.firstName.required">This field is required!</div>
-            <div class="alert alert-danger" v-else-if="!$v.firstName.firstNamePattern">
+            <div class="alert alert-danger" v-if="!$v.firstName.required">
+              This field is required!
+            </div>
+            <div
+              class="alert alert-danger"
+              v-else-if="!$v.firstName.firstNamePattern"
+            >
               First name should contain only letters and should start with a
               capital letter!
             </div>
@@ -92,8 +108,13 @@
             @blur="$v.lastName.$touch"
           />
           <template v-if="$v.lastName.$error">
-            <div class="alert alert-danger" v-if="!$v.lastName.required">This field is required!</div>
-            <div class="alert alert-danger" v-else-if="!$v.lastName.namePattern">
+            <div class="alert alert-danger" v-if="!$v.lastName.required">
+              This field is required!
+            </div>
+            <div
+              class="alert alert-danger"
+              v-else-if="!$v.lastName.namePattern"
+            >
               Last name should contain only letters and should start with a
               capital letter!
             </div>
@@ -110,14 +131,17 @@
             @blur="$v.email.$touch"
           />
           <template v-if="$v.email.$error">
-            <div class="alert alert-danger" v-if="!$v.email.required">This field is required!</div>
-            <div
-              class="alert alert-danger"
-              v-else-if="!$v.email.email"
-            >Please enter a valid email address!</div>
+            <div class="alert alert-danger" v-if="!$v.email.required">
+              This field is required!
+            </div>
+            <div class="alert alert-danger" v-else-if="!$v.email.email">
+              Please enter a valid email address!
+            </div>
           </template>
         </div>
-        <button type="submit" class="btn btn-success">Register</button>
+        <button type="submit" class="btn btn-success" :disabled="$v.$error">
+          Register
+        </button>
       </form>
     </div>
   </div>
@@ -126,6 +150,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
+import { sign } from "@/services/authService";
 
 function sameAs(value1) {
   return function(value2) {
@@ -134,7 +159,7 @@ function sameAs(value1) {
 }
 
 export default {
-  mixins: [validationMixin],
+  mixins: [validationMixin, sign],
   data() {
     return {
       username: "",
@@ -181,19 +206,16 @@ export default {
   },
   methods: {
     submitHandler() {
-      const form = {
+      const model = {
         username: this.$v.username.$model,
         password: this.$v.password.$model,
-        confirmPassword: this.$v.confirmPassword.$model,
-        firstName: this.$v.firstName.$model,
-        lastName: this.$v.lastName.$model,
+        confirmpassword: this.$v.confirmPassword.$model,
+        firstname: this.$v.firstName.$model,
+        lastname: this.$v.lastName.$model,
         email: this.$v.email.$model
       };
-      this.$v.$touch();
-      if (this.$v.$error) {
-        return;
-      }
-      console.log(form);
+
+      this.register(model).then(this.$router.push("books"));
     }
   }
 };

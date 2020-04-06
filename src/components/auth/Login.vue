@@ -17,8 +17,13 @@
             @blur="$v.username.$touch"
           />
           <template v-if="$v.username.$error">
-            <div class="alert alert-danger" v-if="!$v.username.required">This field is required!</div>
-            <div class="alert alert-danger" v-else-if="!$v.username.usernamePattern">
+            <div class="alert alert-danger" v-if="!$v.username.required">
+              This field is required!
+            </div>
+            <div
+              class="alert alert-danger"
+              v-else-if="!$v.username.usernamePattern"
+            >
               Username should be at least 3 symbols long and should contain only
               letters and digits!
             </div>
@@ -35,8 +40,13 @@
             @blur="$v.password.$touch"
           />
           <template v-if="$v.password.$error">
-            <div class="alert alert-danger" v-if="!$v.password.required">This field is required!</div>
-            <div class="alert alert-danger" v-else-if="!$v.password.passwordPattern">
+            <div class="alert alert-danger" v-if="!$v.password.required">
+              This field is required!
+            </div>
+            <div
+              class="alert alert-danger"
+              v-else-if="!$v.password.passwordPattern"
+            >
               Password should contain only letters and digits and must be
               between 4 and 16 symbols!
             </div>
@@ -51,9 +61,10 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import { sign } from "@/services/authService";
 
 export default {
-  mixins: [validationMixin],
+  mixins: [validationMixin, sign],
   data() {
     return {
       username: "",
@@ -76,14 +87,12 @@ export default {
   },
   methods: {
     submitHandler() {
-      const form = {
+      const model = {
         username: this.$v.username.$model,
         password: this.$v.password.$model
       };
-      if (this.$v.$error) {
-        return;
-      }
-      console.log(form);
+
+      this.login(model).then(this.$router.push("books"));
     }
   }
 };
