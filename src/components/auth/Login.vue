@@ -92,7 +92,10 @@ export default {
         password: this.$v.password.$model
       };
 
-      this.login(model).then(this.$router.push("books"));
+      this.login(model).then(() => {
+        this.$root.$emit("logged");
+        this.$router.push("books");
+      });
     }
   }
 };

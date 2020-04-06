@@ -1,12 +1,16 @@
 <template>
   <div class="row">
-    <div class="col-lg-4">
-      <h2 class="card-header">Book Title</h2>
+    <div class="col-lg-4" v-for="book in books" :key="book._id">
+      <h2 class="card-header">{{ book.title }}</h2>
       <div class="card-body">
-        <h3 class="card-title">Book Subtitle</h3>
-        <h4 class="card-title">Author: Book Author</h4>
+        <h3 class="card-title">{{ book.subtitle }}</h3>
+        <h4 class="card-title">Author: {{ book.author }}</h4>
       </div>
-      <img style="height: 400px; width: 300px;" src="" alt="Card image" />
+      <img
+        style="height: 400px; width: 300px;"
+        :src="book.imageUrl"
+        :alt="book.title"
+      />
       <br />
       <p class="lead">
         <a class="btn btn-primary" role="button">View Details</a>
@@ -16,7 +20,10 @@
 </template>
 
 <script>
-export default {};
+import { booksServices } from "@/services/booksService";
+export default {
+  mixins: [booksServices]
+};
 </script>
 
 <style scoped>

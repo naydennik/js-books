@@ -5,8 +5,8 @@
     <hr class="my-4" />
     <p>If you want to look at the collection or add a new book please login!</p>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" routerLink="/auth/login" role="button"
-        >Login</a
+      <router-link to="/login" class="btn btn-primary btn-lg" role="button"
+        >Login</router-link
       >
     </p>
   </div>

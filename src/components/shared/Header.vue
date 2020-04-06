@@ -16,7 +16,7 @@
           </template>
           <template v-else
             ><li class="nav-item">
-              <a class="nav-link">Logout</a>
+              <a class="nav-link" @click="onLogout()">Logout</a>
             </li>
           </template>
           <li class="nav-item dropdown">
@@ -60,7 +60,10 @@
 </template>
 
 <script>
+import { sign } from "@/services/authService";
+
 export default {
+  mixins: [sign],
   data: () => {
     return {
       isActive: false
@@ -69,6 +72,11 @@ export default {
   methods: {
     toggle() {
       this.isActive = !this.isActive;
+    },
+    onLogout() {
+      this.logout().then(() => {
+        this.$router.push("/");
+      });
     }
   }
 };
