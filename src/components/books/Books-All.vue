@@ -6,11 +6,7 @@
         <h3 class="card-title">{{ book.subtitle }}</h3>
         <h4 class="card-title">Author: {{ book.author }}</h4>
       </div>
-      <img
-        style="height: 400px; width: 300px;"
-        :src="book.imageUrl"
-        :alt="book.title"
-      />
+      <img style="height: 400px; width: 300px;" :src="book.imageUrl" :alt="book.title" />
       <br />
       <p class="lead">
         <a class="btn btn-primary" role="button">View Details</a>
@@ -22,7 +18,10 @@
 <script>
 import { booksServices } from "@/services/booksService";
 export default {
-  mixins: [booksServices]
+  mixins: [booksServices],
+  created() {
+    this.getAllBooks();
+  }
 };
 </script>
 

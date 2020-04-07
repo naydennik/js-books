@@ -14,7 +14,7 @@ import BooksEdit from "@/components/books/Books-Edit";
 import NotFound from "@/components/shared/NotFound";
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", name: "home", component: Home },
   { path: "/about", component: About },
   { path: "/register", component: Register },
   { path: "/login", component: Login },
@@ -22,10 +22,10 @@ const routes = [
   { path: "/books/create", component: BooksCreate },
   { path: "/books/details/:id", component: BooksDetails },
   { path: "/books/details/:id/edit", component: BooksEdit },
-  { path: "*", component: NotFound }
+  { path: "*", component: NotFound },
 ];
 
 export default new VueRouter({
   mode: "history",
-  routes
+  routes,
 });

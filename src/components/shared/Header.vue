@@ -9,13 +9,11 @@
               <router-link to="/login" class="nav-link">Login</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/register" class="nav-link"
-                >Register</router-link
-              >
+              <router-link to="/register" class="nav-link">Register</router-link>
             </li>
           </template>
-          <template v-else
-            ><li class="nav-item">
+          <template v-else>
+            <li class="nav-item">
               <a class="nav-link" @click="onLogout()">Logout</a>
             </li>
           </template>
@@ -27,8 +25,7 @@
               aria-haspopup="true"
               data-toggle="dropdown"
               @click="toggle()"
-              >Books</a
-            >
+            >Books</a>
             <div
               class="dropdown"
               style="left: 0px; top: 0px; position: absolute; transform: translate3d(0px, 40px, 0px);"
@@ -39,14 +36,10 @@
                 'dropdown-menu show': isActive
               }"
             >
-              <router-link to="/books" class="dropdown-item"
-                >All Books</router-link
-              >
+              <router-link to="/books" class="dropdown-item">All Books</router-link>
               <template v-if="isAdmin">
                 <div class="dropdown-divider" @click="toggle()"></div>
-                <router-link to="/books/create" class="dropdown-item"
-                  >Create Book</router-link
-                >
+                <router-link to="/books/create" class="dropdown-item">Create Book</router-link>
               </template>
             </div>
           </li>
@@ -74,9 +67,7 @@ export default {
       this.isActive = !this.isActive;
     },
     onLogout() {
-      this.logout().then(() => {
-        this.$router.push("/");
-      });
+      this.logout();
     }
   }
 };
