@@ -17,13 +17,8 @@
             @blur="$v.username.$touch"
           />
           <template v-if="$v.username.$error">
-            <div class="alert alert-danger" v-if="!$v.username.required">
-              This field is required!
-            </div>
-            <div
-              class="alert alert-danger"
-              v-else-if="!$v.username.usernamePattern"
-            >
+            <div class="alert alert-danger" v-if="!$v.username.required">This field is required!</div>
+            <div class="alert alert-danger" v-else-if="!$v.username.usernamePattern">
               Username should be at least 3 symbols long and should contain only
               letters and digits!
             </div>
@@ -40,13 +35,8 @@
             @blur="$v.password.$touch"
           />
           <template v-if="$v.password.$error">
-            <div class="alert alert-danger" v-if="!$v.password.required">
-              This field is required!
-            </div>
-            <div
-              class="alert alert-danger"
-              v-else-if="!$v.password.passwordPattern"
-            >
+            <div class="alert alert-danger" v-if="!$v.password.required">This field is required!</div>
+            <div class="alert alert-danger" v-else-if="!$v.password.passwordPattern">
               Password should contain only letters and digits and must be
               between 4 and 16 symbols!
             </div>

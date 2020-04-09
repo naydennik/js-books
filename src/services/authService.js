@@ -1,5 +1,4 @@
 import config from "@/config/config";
-import axios from "axios";
 
 const loginUser = (user) => {
   sessionStorage.setItem("username", user.username);
@@ -57,23 +56,23 @@ export const sign = {
           })
         );
     },
-
-    logout() {
-      return axios({
-        method: "post",
-        url: `https://baas.kinvey.com/user/${config.kinveyAppKey}/_logout`,
-        data: "",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Kinvey ${this.authtoken}`,
-        },
-      }).then(() => {
-        clearSessionStorage();
-        this.$router.push({ name: "home" });
-      });
-    },
   },
   created() {
     this.$http.defaults.headers.post["Authorization"] = `Basic ${authString}`;
+  },
+};
+
+export const signout = {
+  methods: {
+    logout() {
+      return this.$http
+        .post(`/user/${config.kinveyAppKey}/_logout`, "", {
+          "Content-Type": "application/json",
+          Authorization: `Kinvey ${this.authtoken}`,
+        })
+        .then(() => {
+          clearSessionStorage();
+        });
+    },
   },
 };

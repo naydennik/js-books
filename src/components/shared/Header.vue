@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import { sign } from "@/services/authService";
+import { signout } from "@/services/authService";
 
 export default {
-  mixins: [sign],
+  mixins: [signout],
   data: () => {
     return {
       isActive: false
@@ -67,7 +67,9 @@ export default {
       this.isActive = !this.isActive;
     },
     onLogout() {
-      this.logout();
+      this.logout().then(() => {
+        this.$router.push({ name: "home" });
+      });
     }
   }
 };
