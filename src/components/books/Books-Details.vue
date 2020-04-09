@@ -20,7 +20,11 @@
         </li>
       </ul>
       <div v-if="isAdmin">
-        <button class="btn btn-primary btn-lg">Edit</button>
+        <router-link
+          :to="{name: 'BookEdit', params: {id: book._id}}"
+          class="btn btn-primary btn-lg"
+          tag="button"
+        >Edit</router-link>
         <button class="btn btn-primary btn-lg">Delete</button>
       </div>
     </div>

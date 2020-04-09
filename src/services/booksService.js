@@ -21,6 +21,10 @@ export const booksServices = {
         .get(`appdata/${config.kinveyAppKey}/books/${id}`)
         .then(({ data }) => (this.book = data));
     },
+
+    editBook(id, data) {
+      return this.$http.put(`appdata/${config.kinveyAppKey}/books/${id}`, data);
+    },
   },
   created() {
     this.$http.defaults.headers["Authorization"] = `Kinvey ${getAuthtoken()}`;
