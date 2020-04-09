@@ -52,15 +52,39 @@
               id="new-author"
               type="text"
               name="author"
-              pattern="^[A-Z][A-Za-z ,]+$"
+              v-model="author"
+              @blur="$v.author.$touch"
             />
+            <template v-if="$v.author.$error">
+              <div class="alert alert-danger" v-if="!$v.author.required">This field is required!</div>
+              <div class="alert alert-danger" v-else-if="!$v.author.authorPattern">
+                The author's name should start with capital letter and should be at
+                least 2 symbols long!
+              </div>
+            </template>
           </div>
           <div class="form-group">
             <h4>Image</h4>
-            <input class="form-control" id="new-image" type="text" name="imageUrl" />
+            <input
+              class="form-control"
+              id="new-image"
+              type="text"
+              name="imageUrl"
+              v-model="imageUrl"
+              @blur="$v.imageUrl.$touch"
+            />
             <br />
-            <img id="img" src alt />
+            <img id="img" src="imageUrl.value" />
+            <template v-if="$v.imageUrl.$error">
+              <div class="alert alert-danger" v-if="!$v.imageUrl.required">
+                This field is required! Please enter a correct URL! If the link is
+                correct, you will see a preview of the image.
+              </div>
+            </template>
           </div>
+
+          <!-- TODO -->
+
           <div class="form-group">
             <h4>Description</h4>
             <textarea
@@ -111,7 +135,7 @@
             <h4>Official Website</h4>
             <input class="form-control" id="new-website" type="url" name="website" />
           </div>
-          <input type="submit" class="btn btn-primary" value="Edit" :disabled="$v.$error" />
+          <input type="submit" class="btn btn-primary" value="Edit" @click="print" />
         </div>
       </div>
     </form>
@@ -125,11 +149,17 @@ import { required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [booksServices, validationMixin],
+  created() {
+    const id = this.$route.params.id;
+    this.getBookDetails(id).then(res => (this.book = res));
+  },
   data() {
     return {
-      id: this.$route.params.id,
+      book: {},
       title: "",
-      subtitle: ""
+      subtitle: "",
+      author: "",
+      imageUrl: ""
     };
   },
   validations: {
@@ -144,20 +174,29 @@ export default {
       subtitlePattern(subtitle) {
         return /^[A-Z]{1}.+$/.test(subtitle);
       }
+    },
+    author: {
+      required,
+      authorPattern(author) {
+        return /^[A-Z][A-Za-z ,]+$/.test(author);
+      }
+    },
+    imageUrl: {
+      required
     }
   },
   methods: {
     submitHandler() {
       const model = {
         title: this.$v.title.$model,
-        password: this.$v.subtitle.$model
+        subtitle: this.$v.subtitle.$model
       };
 
       this.editBook(this.id, model).then(this.$router.push("books"));
+    },
+    print() {
+      console.log(this.book.title);
     }
-  },
-  created() {
-    this.getBookDetails(this.id);
   }
 };
 </script>
