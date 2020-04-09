@@ -6,14 +6,23 @@ export const booksServices = {
   data() {
     return {
       books: [],
+      book: [],
     };
   },
   methods: {
     getAllBooks() {
-      this.$http.defaults.headers["Authorization"] = `Kinvey ${getAuthtoken()}`;
       return this.$http
         .get(`appdata/${config.kinveyAppKey}/books`)
         .then(({ data }) => (this.books = data));
     },
+
+    getBookDetails(id) {
+      return this.$http
+        .get(`appdata/${config.kinveyAppKey}/books/${id}`)
+        .then(({ data }) => (this.book = data));
+    },
+  },
+  created() {
+    this.$http.defaults.headers["Authorization"] = `Kinvey ${getAuthtoken()}`;
   },
 };

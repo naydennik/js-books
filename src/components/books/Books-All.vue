@@ -9,7 +9,11 @@
       <img style="height: 400px; width: 300px;" :src="book.imageUrl" :alt="book.title" />
       <br />
       <p class="lead">
-        <a class="btn btn-primary" role="button">View Details</a>
+        <router-link
+          :to="{name: 'BookDetails', params: {id: book._id}}"
+          class="btn btn-primary"
+          tag="button"
+        >View Details</router-link>
       </p>
     </div>
   </div>

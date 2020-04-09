@@ -20,8 +20,8 @@ const routes = [
   { path: "/login", component: Login },
   { path: "/books", component: BooksAll },
   { path: "/books/create", component: BooksCreate },
-  { path: "/books/details/:id", component: BooksDetails },
-  { path: "/books/details/:id/edit", component: BooksEdit },
+  { path: "/books/:id", name: "BookDetails", component: BooksDetails },
+  { path: "/books/:id/edit", component: BooksEdit },
   { path: "*", component: NotFound },
 ];
 
