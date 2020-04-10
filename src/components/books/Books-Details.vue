@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     delBook() {
-      this.deleteBook(this.id).then(this.$router.push({ name: "allBooks" }));
+      this.deleteBook(this.id);
     }
   }
 };

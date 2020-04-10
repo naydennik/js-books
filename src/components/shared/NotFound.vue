@@ -4,19 +4,16 @@
       <div class="row">
         <div class="col-md-12">
           <div class="error-template">
-            <h1>
-              Oops!
-            </h1>
-            <h2>
-              404 Not Found
-            </h2>
-            <div class="error-details">
-              Sorry, an error has occured, Requested page not found!
-            </div>
+            <h1>Oops!</h1>
+            <h2>404 Not Found</h2>
+            <div class="error-details">Sorry, an error has occured, Requested page not found!</div>
             <div class="error-actions">
-              <router-link to="/" exact class="btn btn-primary btn-lg"
-                >Take Me Home</router-link
-              >
+              <template v-if="isAuthenticated">
+                <router-link to="/books" class="btn btn-primary btn-lg">Take Me Home</router-link>
+              </template>
+              <template v-else>
+                <router-link to="/" exact class="btn btn-primary btn-lg">Take Me Home</router-link>
+              </template>
             </div>
           </div>
         </div>

@@ -13,25 +13,64 @@ export const booksServices = {
     getAllBooks() {
       return this.$http
         .get(`appdata/${config.kinveyAppKey}/books`)
-        .then(({ data }) => (this.books = data));
+        .then(({ data }) => (this.books = data))
+        .catch((error) => {
+          console.warn(error);
+        });
     },
 
     getBookDetails(id) {
       return this.$http
         .get(`appdata/${config.kinveyAppKey}/books/${id}`)
-        .then(({ data }) => (this.book = data));
+        .then(({ data }) => (this.book = data))
+        .catch((error) => {
+          console.warn(error);
+        });
     },
 
     editBook(id, data) {
-      return this.$http.put(`appdata/${config.kinveyAppKey}/books/${id}`, data);
+      return this.$http
+        .put(`appdata/${config.kinveyAppKey}/books/${id}`, data)
+        .then((res) => {
+          if (res.status >= 200 && res.status < 300) {
+            window.alert("Successfully edited!");
+            this.$router.push({ name: "allBooks" });
+          }
+        })
+        .catch((error) => {
+          window.alert("Something went wrong! Please try again.");
+          console.warn(error);
+        });
     },
 
     createBook(data) {
-      return this.$http.post(`appdata/${config.kinveyAppKey}/books`, data);
+      return this.$http
+        .post(`appdata/${config.kinveyAppKey}/books`, data)
+        .then((res) => {
+          if (res.status >= 200 && res.status < 300) {
+            window.alert("Successfully created!");
+            this.$router.push({ name: "allBooks" });
+          }
+        })
+        .catch((error) => {
+          window.alert("Something went wrong! Please try again.");
+          console.warn(error);
+        });
     },
 
     deleteBook(id) {
-      return this.$http.delete(`appdata/${config.kinveyAppKey}/books/${id}`);
+      return this.$http
+        .delete(`appdata/${config.kinveyAppKey}/books/${id}`)
+        .then((res) => {
+          if (res.status >= 200 && res.status < 300) {
+            window.alert("Successfully deleted!");
+            this.$router.push({ name: "allBooks" });
+          }
+        })
+        .catch((error) => {
+          window.alert("Something went wrong! Please try again.");
+          console.warn(error);
+        });
     },
   },
   created() {

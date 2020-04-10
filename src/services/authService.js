@@ -35,26 +35,48 @@ export const sign = {
   methods: {
     register(params) {
       return this.$http
-        .post(`/user/${config.kinveyAppKey}`, params)
-        .then((res) =>
+        .post(`/user${config.kinveyAppKey}`, params)
+        .then((res) => {
           loginUser({
             username: res.data.username,
             authtoken: res.data._kmd.authtoken,
             id: res.data._id,
-          })
-        );
+          });
+          this.$root.$emit("logged");
+          this.$router.push({ name: "allBooks" });
+        })
+        .catch((err) => {
+          if (err.status === 409) {
+            window.alert(
+              "This username is taken! Please try with different one."
+            );
+          } else {
+            window.alert(
+              "Something went wrong ): Please check if the username and password are correct!\nIf you still have a problem, contact us."
+            );
+          }
+          console.warn(err);
+        });
     },
 
     login(params) {
       return this.$http
         .post(`/user/${config.kinveyAppKey}/login`, params)
-        .then((res) =>
+        .then((res) => {
           loginUser({
             username: res.data.username,
             authtoken: res.data._kmd.authtoken,
             id: res.data._id,
-          })
-        );
+          });
+          this.$root.$emit("logged");
+          this.$router.push({ name: "allBooks" });
+        })
+        .catch((err) => {
+          window.alert(
+            "Something went wrong ): Please check if the username and password are correct!\nIf you still have a problem, contact us."
+          );
+          console.warn(err);
+        });
     },
   },
   created() {

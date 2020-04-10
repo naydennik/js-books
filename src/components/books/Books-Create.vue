@@ -74,7 +74,7 @@
               @blur="$v.imageUrl.$touch"
             />
             <br />
-            <img id="img" src alt />
+            <img id="img" :src="imageUrl" :alt="title" />
             <template v-if="$v.imageUrl.$error">
               <div class="alert alert-danger" v-if="!$v.imageUrl.required">
                 This field is required! Please enter a correct URL! If the link is
@@ -293,7 +293,7 @@ export default {
         website: this.$v.website.$model
       };
 
-      this.createBook(model).then(this.$router.push({ name: "allBooks" }));
+      this.createBook(model);
     }
   }
 };

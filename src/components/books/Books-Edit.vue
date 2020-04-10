@@ -121,9 +121,7 @@ export default {
   },
   methods: {
     editHandler() {
-      this.editBook(this.id, this.book).then(
-        this.$router.push({ name: "allBooks" })
-      );
+      this.editBook(this.id, this.book);
     }
   }
 };
