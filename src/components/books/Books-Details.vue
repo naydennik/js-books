@@ -21,11 +21,11 @@
       </ul>
       <div v-if="isAdmin">
         <router-link
-          :to="{name: 'BookEdit', params: {id: book._id}}"
+          :to="{name: 'bookEdit', params: {id: book._id}}"
           class="btn btn-primary btn-lg"
           tag="button"
         >Edit</router-link>
-        <button class="btn btn-primary btn-lg">Delete</button>
+        <button class="btn btn-primary btn-lg" @click="delBook">Delete</button>
       </div>
     </div>
   </div>
@@ -36,9 +36,18 @@ import { booksServices } from "@/services/booksService";
 import { authServices } from "@/services/authService";
 export default {
   mixins: [booksServices, authServices],
+  data() {
+    return {
+      id: this.$route.params.id
+    };
+  },
   created() {
-    const id = this.$route.params.id;
-    this.getBookDetails(id);
+    this.getBookDetails(this.id);
+  },
+  methods: {
+    delBook() {
+      this.deleteBook(this.id).then(this.$router.push({ name: "allBooks" }));
+    }
   }
 };
 </script>

@@ -191,7 +191,7 @@ export default {
         email: this.$v.email.$model
       };
 
-      this.register(model).then(this.$router.push("login"));
+      this.register(model).then(this.$router.push({ name: "login" }));
     }
   }
 };

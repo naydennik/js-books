@@ -1,7 +1,13 @@
 <template>
   <div id="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <router-link to="/" exact class="navbar-brand">JS Books</router-link>
+      <template v-if="!isAuthenticated">
+        <router-link to="/" exact class="navbar-brand">JS Books</router-link>
+      </template>
+      <template v-else>
+        <router-link to="/books" class="navbar-brand">JS Books</router-link>
+      </template>
+
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <template v-if="!isAuthenticated">
@@ -36,8 +42,8 @@
                 'dropdown-menu show': isActive
               }"
             >
-              <router-link to="/books" class="dropdown-item">All Books</router-link>
-              <template v-if="isAdmin">
+              <router-link to="/books" class="dropdown-item" role="button">All Books</router-link>
+              <template v-if="isAuthenticated && isAdmin">
                 <div class="dropdown-divider" @click="toggle()"></div>
                 <router-link to="/books/create" class="dropdown-item">Create Book</router-link>
               </template>
@@ -64,7 +70,9 @@ export default {
   },
   methods: {
     toggle() {
-      this.isActive = !this.isActive;
+      if (this.isAuthenticated) {
+        this.isActive = !this.isActive;
+      }
     },
     onLogout() {
       this.logout().then(() => {

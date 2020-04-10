@@ -15,14 +15,18 @@ import NotFound from "@/components/shared/NotFound";
 
 const routes = [
   { path: "/", name: "home", component: Home },
-  { path: "/about", component: About },
-  { path: "/register", component: Register },
-  { path: "/login", component: Login },
-  { path: "/books", component: BooksAll },
-  { path: "/books/create", component: BooksCreate },
-  { path: "/books/:id", name: "BookDetails", component: BooksDetails },
-  { path: "/books/:id/edit", name: "BookEdit", component: BooksEdit },
-  { path: "*", component: NotFound },
+  { path: "/about", name: "about", component: About },
+  { path: "/register", name: "register", component: Register },
+  { path: "/login", name: "login", component: Login },
+  {
+    path: "/books",
+    name: "allBooks",
+    component: BooksAll,
+  },
+  { path: "/books/create", name: "create", component: BooksCreate },
+  { path: "/books/:id", name: "bookDetails", component: BooksDetails },
+  { path: "/books/edit/:id", name: "bookEdit", component: BooksEdit },
+  { path: "*", name: "notFound", component: NotFound },
 ];
 
 export default new VueRouter({

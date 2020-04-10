@@ -10,7 +10,7 @@
       <br />
       <p class="lead">
         <router-link
-          :to="{name: 'BookDetails', params: {id: book._id}}"
+          :to="{name: 'bookDetails', params: {id: book._id}}"
           class="btn btn-primary"
           tag="button"
         >View Details</router-link>

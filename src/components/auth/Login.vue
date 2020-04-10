@@ -84,7 +84,7 @@ export default {
 
       this.login(model).then(() => {
         this.$root.$emit("logged");
-        this.$router.push("books");
+        this.$router.push({ name: "allBooks" });
       });
     }
   }
