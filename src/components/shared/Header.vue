@@ -75,9 +75,7 @@ export default {
       }
     },
     onLogout() {
-      this.logout().then(() => {
-        this.$router.push({ name: "home" });
-      });
+      this.logout();
     }
   }
 };

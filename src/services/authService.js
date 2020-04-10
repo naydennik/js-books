@@ -35,7 +35,7 @@ export const sign = {
   methods: {
     register(params) {
       return this.$http
-        .post(`/user${config.kinveyAppKey}`, params)
+        .post(`/user/${config.kinveyAppKey}`, params)
         .then((res) => {
           loginUser({
             username: res.data.username,
@@ -94,6 +94,11 @@ export const signout = {
         })
         .then(() => {
           clearSessionStorage();
+          this.$router.push({ name: "home" });
+          location.reload();
+        })
+        .catch((err) => {
+          console.warn(err);
         });
     },
   },
