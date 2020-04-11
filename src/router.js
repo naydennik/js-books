@@ -21,15 +21,15 @@ const routes = [
   {
     path: "/books",
     name: "allBooks",
-    component: BooksAll,
+    component: BooksAll
   },
   { path: "/books/create", name: "create", component: BooksCreate },
   { path: "/books/:id", name: "bookDetails", component: BooksDetails },
   { path: "/books/edit/:id", name: "bookEdit", component: BooksEdit },
-  { path: "*", name: "notFound", component: NotFound },
+  { path: "*", name: "notFound", component: NotFound }
 ];
 
 export default new VueRouter({
   mode: "history",
-  routes,
+  routes
 });

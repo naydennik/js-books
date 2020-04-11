@@ -49,4 +49,8 @@ export default {
   background-color: #325d88;
   border-color: #325d88;
 }
+
+.col-lg-4 {
+  padding: 50px;
+}
 </style>
