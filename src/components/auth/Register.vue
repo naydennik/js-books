@@ -117,6 +117,19 @@
             >Please enter a valid email address!</div>
           </template>
         </div>
+        <div class="form-group">
+          <label for="imageUrl">User Image</label>
+          <input
+            class="form-control"
+            id="imageUrl"
+            type="text"
+            name="imageUrl"
+            placeholder="Please enter your image URL"
+            v-model="imageUrl"
+          />
+          <br />
+          <img id="img" :src="imageUrl" :alt="username" />
+        </div>
         <button type="submit" class="btn btn-success" :disabled="$v.$error">Register</button>
       </form>
     </div>
@@ -143,7 +156,8 @@ export default {
       confirmPassword: "",
       firstName: "",
       lastName: "",
-      email: ""
+      email: "",
+      imageUrl: ""
     };
   },
   validations: {
@@ -178,7 +192,8 @@ export default {
     email: {
       required,
       email
-    }
+    },
+    imageUrl: {}
   },
   methods: {
     submitHandler() {
@@ -188,7 +203,10 @@ export default {
         confirmpassword: this.$v.confirmPassword.$model,
         firstname: this.$v.firstName.$model,
         lastname: this.$v.lastName.$model,
-        email: this.$v.email.$model
+        email: this.$v.email.$model,
+        imageUrl: this.$v.imageUrl.$model
+          ? undefined
+          : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
       };
 
       this.register(model);

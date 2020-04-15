@@ -53,6 +53,16 @@
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
         </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="navbar-nav">
+            <a class="navbar-brand">{{username}}</a>
+          </li>
+          <li class="nav-item avatar">
+            <a class="nav-link p-0">
+              <img :src="imageUrl" class="rounded-circle z-depth-0" :alt="username" height="35" />
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
   </div>
@@ -65,15 +75,16 @@ export default {
   mixins: [signout],
   data: () => {
     return {
-      isActive: false
+      isActive: false,
+      imageUrl: sessionStorage.getItem("imageUrl"),
+      username: sessionStorage.getItem("username")
     };
   },
   methods: {
     toggle() {
-      if (this.isAuthenticated) {
-        this.isActive = !this.isActive;
-      }
+      this.isActive = !this.isActive;
     },
+
     onLogout() {
       this.logout();
     }

@@ -13,6 +13,16 @@ import BooksDetails from "@/components/books/Books-Details";
 import BooksEdit from "@/components/books/Books-Edit";
 import NotFound from "@/components/shared/NotFound";
 
+function guardMyroute(to, from, next) {
+  let isAuthenticated = sessionStorage.getItem("authtoken") ? true : false;
+
+  if (isAuthenticated) {
+    next(); // allow to enter route
+  } else {
+    next("/"); // go to home page;
+  }
+}
+
 const routes = [
   { path: "/", name: "home", component: Home },
   { path: "/about", name: "about", component: About },
@@ -21,11 +31,28 @@ const routes = [
   {
     path: "/books",
     name: "allBooks",
+    beforeEnter: guardMyroute,
     component: BooksAll
   },
-  { path: "/books/create", name: "create", component: BooksCreate },
-  { path: "/books/:id", name: "bookDetails", component: BooksDetails },
-  { path: "/books/edit/:id", name: "bookEdit", component: BooksEdit },
+  {
+    path: "/books/create",
+    name: "create",
+    beforeEnter: guardMyroute,
+    component: BooksCreate
+  },
+  {
+    path: "/books/:id",
+    name: "bookDetails",
+    beforeEnter: guardMyroute,
+    component: BooksDetails
+  },
+  {
+    path: "/books/edit/:id",
+    name: "bookEdit",
+    beforeEnter: guardMyroute,
+    component: BooksEdit
+  },
+
   { path: "*", name: "notFound", component: NotFound }
 ];
 
