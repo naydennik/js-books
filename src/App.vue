@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <app-header />
+    <app-header></app-header>
     <router-view></router-view>
-    <app-footer />
+    <app-footer v-bind:creator="creator"></app-footer>
   </div>
 </template>
 
@@ -18,9 +18,15 @@ export default {
     AppFooter
   },
 
-  data: () => ({
-    //
-  })
+  data: () => {
+    return {
+      creator: {
+        name: "Nayden Nikolov",
+        email: "mailto:naydennik@gmail.com?",
+        fbUrl: "https://www.facebook.com/naydennik"
+      }
+    };
+  }
 };
 </script>
 <style>
