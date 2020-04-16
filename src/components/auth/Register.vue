@@ -1,6 +1,18 @@
 <template>
   <div class="container">
-    <div class="col-md-4">
+    <template v-if="this.isLoading" class="row">
+      <div class="loader">
+        <h3>Loading...</h3>
+        <br />
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </template>
+    <div class="col-md-4" v-else>
       <br />
       <br />
       <h1>Registration Form</h1>
@@ -128,7 +140,10 @@
             v-model="imageUrl"
           />
           <br />
-          <img id="img" :src="imageUrl" :alt="username" />
+          <img
+            id="img"
+            :src="imageUrl ? undefined : 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'"
+          />
         </div>
         <button type="submit" class="btn btn-success" :disabled="$v.$error">Register</button>
       </form>
@@ -215,4 +230,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.col-lg-4 {
+  padding: 50px;
+}
+
+.loader {
+  margin: auto;
+  padding: 200px;
+}
+</style>

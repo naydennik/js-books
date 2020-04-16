@@ -53,11 +53,11 @@
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto nav-flex-icons">
+        <ul class="navbar-nav ml-auto nav-flex-icons" v-if="isAuthenticated">
           <li class="navbar-nav">
             <a class="navbar-brand">{{username}}</a>
           </li>
-          <li class="nav-item avatar">
+          <li class="nav-item avatar" v-if="imageUrl !== '' || imageUrl">
             <a class="nav-link p-0">
               <img :src="imageUrl" class="rounded-circle z-depth-0" :alt="username" height="35" />
             </a>

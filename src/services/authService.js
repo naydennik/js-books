@@ -16,6 +16,7 @@ export const authServices = {
   data() {
     return {
       authtoken: sessionStorage.getItem("authtoken"),
+      isLoading: false,
     };
   },
   computed: {
@@ -35,16 +36,12 @@ export const authServices = {
 export const sign = {
   methods: {
     register(params) {
+      this.isLoading = true;
       return this.$http
         .post(`/user/${config.kinveyAppKey}`, params)
-        .then((res) => {
-          loginUser({
-            username: res.data.username,
-            authtoken: res.data._kmd.authtoken,
-            id: res.data._id,
-          });
-          this.$root.$emit("logged");
-          this.$router.push({ name: "allBooks" });
+        .then(() => {
+          this.$router.push({ name: "login" });
+          this.isLoading = false;
           location.reload();
         })
         .catch((err) => {
