@@ -1,6 +1,6 @@
 import config from "@/config/config";
 
-const loginUser = user => {
+const loginUser = (user) => {
   sessionStorage.setItem("username", user.username);
   sessionStorage.setItem("authtoken", user.authtoken);
   sessionStorage.setItem("id", user.id);
@@ -15,7 +15,7 @@ const clearSessionStorage = () => sessionStorage.clear();
 export const authServices = {
   data() {
     return {
-      authtoken: sessionStorage.getItem("authtoken")
+      authtoken: sessionStorage.getItem("authtoken"),
     };
   },
   computed: {
@@ -25,11 +25,11 @@ export const authServices = {
 
     isAdmin() {
       return sessionStorage.getItem("id") === config.adminId;
-    }
+    },
   },
   created() {
-    this.$root.$on("logged", authtoken => (this.authtoken = authtoken));
-  }
+    this.$root.$on("logged", (authtoken) => (this.authtoken = authtoken));
+  },
 };
 
 export const sign = {
@@ -37,17 +37,17 @@ export const sign = {
     register(params) {
       return this.$http
         .post(`/user/${config.kinveyAppKey}`, params)
-        .then(res => {
+        .then((res) => {
           loginUser({
             username: res.data.username,
             authtoken: res.data._kmd.authtoken,
-            id: res.data._id
+            id: res.data._id,
           });
           this.$root.$emit("logged");
           this.$router.push({ name: "allBooks" });
           location.reload();
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.status === 409) {
             window.alert(
               "This username is taken! Please try with different one."
@@ -64,28 +64,28 @@ export const sign = {
     login(params) {
       return this.$http
         .post(`/user/${config.kinveyAppKey}/login`, params)
-        .then(res => {
+        .then((res) => {
           loginUser({
             username: res.data.username,
             authtoken: res.data._kmd.authtoken,
             id: res.data._id,
-            imageUrl: res.data.imageUrl
+            imageUrl: res.data.imageUrl,
           });
           this.$root.$emit("logged");
           this.$router.push({ name: "allBooks" });
           location.reload();
         })
-        .catch(err => {
+        .catch((err) => {
           window.alert(
             "Something went wrong ): Please check if the username and password are correct!\nIf you still have a problem, contact us."
           );
           console.warn(err);
         });
-    }
+    },
   },
   created() {
     this.$http.defaults.headers.post["Authorization"] = `Basic ${authString}`;
-  }
+  },
 };
 
 export const signout = {
@@ -94,16 +94,16 @@ export const signout = {
       return this.$http
         .post(`/user/${config.kinveyAppKey}/_logout`, "", {
           "Content-Type": "application/json",
-          Authorization: `Kinvey ${this.authtoken}`
+          Authorization: `Kinvey ${this.authtoken}`,
         })
         .then(() => {
           clearSessionStorage();
           this.$router.push({ name: "home" });
           location.reload();
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(err);
         });
-    }
-  }
+    },
+  },
 };

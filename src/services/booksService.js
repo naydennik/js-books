@@ -7,13 +7,18 @@ export const booksServices = {
     return {
       books: [],
       book: [],
+      isLoading: false,
     };
   },
   methods: {
     getAllBooks() {
+      this.isLoading = true;
       return this.$http
         .get(`appdata/${config.kinveyAppKey}/books`)
-        .then(({ data }) => (this.books = data))
+        .then(({ data }) => {
+          this.books = data;
+          this.isLoading = false;
+        })
         .catch((error) => {
           console.warn(error);
         });

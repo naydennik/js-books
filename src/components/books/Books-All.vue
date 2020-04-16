@@ -1,6 +1,18 @@
 <template>
   <div class="row">
-    <div class="col-lg-4" v-for="book in books" :key="book._id">
+    <template v-if="this.isLoading">
+      <div class="loader">
+        <h3>Loading...</h3>
+        <br />
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </template>
+    <div class="col-lg-4" v-for="book in books" :key="book._id" v-else>
       <h2 class="card-header">{{ book.title }}</h2>
       <div class="card-body">
         <h3 class="card-title">{{ book.subtitle }}</h3>
@@ -52,5 +64,10 @@ export default {
 
 .col-lg-4 {
   padding: 50px;
+}
+
+.loader {
+  margin: auto;
+  padding: 200px;
 }
 </style>
