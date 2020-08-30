@@ -1,5 +1,5 @@
 export default {
-  kinveyAppKey: "kid_rkQIJij8U",
-  kinveyAppSecret: "8c58a51391de4c9cb5e0279302d15bca",
-  adminId: "5e9613c9706dfd00153f2235"
+  kinveyAppKey: "kid_r1XMviLZD",
+  kinveyAppSecret: "674aad3ed5c241759422ada610ca348d",
+  adminId: "5f2927fc1fd51a0016753461",
 };
